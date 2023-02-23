@@ -1,37 +1,26 @@
 extends AudioStreamPlayer
 
-var record_effect: AudioEffectRecord
 var capture_effect: AudioEffectCapture
-var audio_buffer:= StreamPeerBuffer.new()
-
-var recording_timer: float = 0.0
-var recording_delay: float = 0.1
+var is_recording: bool = false
 
 func _ready() -> void:
-	record_effect = AudioServer.get_bus_effect(AudioServer.get_bus_index('Record'), 0)
-	capture_effect = AudioServer.get_bus_effect(AudioServer.get_bus_index('Record'), 1)
-
+	capture_effect = AudioServer.get_bus_effect(AudioServer.get_bus_index('Capture'), 0)
 
 func start_recording() -> void:
-	record_effect.set_recording_active(true)
-	recording_timer = 0
+	is_recording = true
+	capture_effect.clear_buffer()
 
 func stop_recording() -> void:
-	record_effect.set_recording_active(false)
-	audio_buffer.clear()
+	is_recording = false
 
-func _process(delta) -> void:
-	if record_effect.is_recording_active():
-		print(capture_effect.get_buffer(128))
-		recording_timer += delta
-		if recording_timer > recording_delay:
-			recording_timer -= recording_delay
-			recording_to_buffer()
+func get_discarded_frames() -> int:
+	return capture_effect.get_discarded_frames()
 
-func recording_to_buffer() -> void:
-	"""
-	record_effect.set_recording_active(false)
-	audio_buffer.put_data(record_effect.get_recording().data)
-	record_effect.set_recording_active(true)
-	"""
+func get_frames_available() -> int:
+	return capture_effect.get_frames_available()
 
+func get_pushed_frames() -> int:
+	return capture_effect.get_pushed_frames()
+
+func get_buffer(frames: int) -> PoolByteArray:
+	return capture_effect.get_buffer_uint16(frames)
