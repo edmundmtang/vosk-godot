@@ -1,0 +1,14 @@
+[entry]
+
+Windows.64="res://bin/win64/gd_vosk.dll"
+
+[dependencies]
+
+Windows.64=[ "res://bin/win64/libvosk.dll" ]
+
+[general]
+
+load_once=true
+singleton=false
+symbol_prefix="godot_"
+reloadable=true
