@@ -11,8 +11,10 @@ void GDVosk::_register_methods() {
 	register_method("accept_waveform", &GDVosk::accept_waveform);
 	register_method("get_partial", &GDVosk::get_partial);
 	register_method("get_final", &GDVosk::get_final);
-
+	register_method("buffer_size", &GDVosk::buffer_size);
+	
 	register_method("set_result_options", &GDVosk::set_result_options);
+
 }
 
 void GDVosk::_init() {
@@ -47,6 +49,10 @@ const char * GDVosk::get_partial() {
 
 const char * GDVosk::get_final() {
 	return vosk_recognizer_final_result(voice_recognizer);
+}
+
+const int GDVosk::buffer_size() {
+	return sizeof buf;
 }
 
 void GDVosk::set_result_options(String result_opts) {

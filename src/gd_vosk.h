@@ -34,6 +34,7 @@ public:
 	int accept_waveform(PoolByteArray data);
 	const char* get_partial();
 	const char* get_final();
+	const int buffer_size();
 	
 	void set_result_options(String result_opts);
 };

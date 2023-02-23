@@ -7,12 +7,10 @@ var VoskRecognizerSource = load("res://bin/gdvosk.gdns")
 var voice_recognizer = VoskRecognizerSource.new()
 var audio_mix_rate: float = ProjectSettings.get_setting("audio/mix_rate")
 
-var record_effect: AudioEffectRecord
-var capture_effect: AudioEffectCapture
-var recording: AudioStreamSample # To Do - might be unnecessary
+
 var is_recording: bool = false
-var audio_buffer := StreamPeerBuffer.new()
-var block_size: int = 1024
+
+var block_size: int = 4096
 var buffer_cursor := 0
 
 var phoneme: String
@@ -20,7 +18,7 @@ var partial_result: String
 var final_result: String
 
 var sampling_timer: float = 0.0
-var sampling_delay := 0.04 # Do not set to under 0.03?
+var sampling_delay := 0.5 # Do not set to under 0.03?
 
 var lm: Dictionary = {
 	small_en = "language_models/vosk-model-small-en-us-0.15",
@@ -30,59 +28,67 @@ var lm: Dictionary = {
 
 func _ready():
 	print("Starting Test!")
-	voice_recognizer.initialize(
-		lm.small_en, # model_path
-		48000 # audio_mix_rate # sample rate
-		)
-	print("Model path: ", voice_recognizer.model_path)
-	print("Sample rate: ", voice_recognizer.sample_rate)
-	record_effect = AudioServer.get_bus_effect(AudioServer.get_bus_index('Record'), 0)
-	capture_effect = AudioServer.get_bus_effect(AudioServer.get_bus_index('Record'), 1)
+
+	var load_voice_rec = false
+	if load_voice_rec:
+		voice_recognizer.initialize(
+			lm.small_en, # model_path
+			48000 # audio_mix_rate # sample rate
+			)
+		var result_option := "phones"
+		voice_recognizer.set_result_options("phones")
+
+		print("Model path: ", voice_recognizer.model_path)
+		print("Sample rate: ", voice_recognizer.sample_rate)
+		print("Buffer_size: ", voice_recognizer.buffer_size())
+		print("Result option: ", result_option)
+
 	$Test_HUD.connect("record_toggled", self, "_on_record_button_toggle")
-	voice_recognizer.set_result_options("phones")
+
 	print('End of Test Initialization\n')
 
 func _on_record_button_toggle() -> void:
-	if is_recording:
+	if recording_player.record_effect.is_recording_active():
 		stop_recording()
 	else:
 		start_recording()
 
 func start_recording() -> void:
 	print("Microphone on")
-	is_recording = true
-	record_effect.set_recording_active(is_recording)
+	recording_player.start_recording()
 
 func stop_recording() -> void:
 	print("Microphone off")
-	is_recording = false
-	record_effect.set_recording_active(is_recording)
-	sampling_timer = 0
+	recording_player.stop_recording()
 
-	print("Buffer_size: ", audio_buffer.get_size())
-	print(voice_recognizer.get_final())
+	var final_output = voice_recognizer.get_final()
+	print(final_output)
+	print(JSON.parse(final_output).get_result()["text"])
 	buffer_cursor = 0
-	audio_buffer.clear()
 
 func _process(delta):
-	if is_recording:
-		sampling_timer += delta
-		if sampling_timer > sampling_delay:
-			queue_audio_data()
-			pass_audio_data()
-			sampling_timer = 0
-			print(voice_recognizer.get_partial())
+	pass
 
+func pass_audio_data():
+	voice_recognizer.accept_waveform(recording_player.audio_buffer.get_data(block_size)[1])
+
+
+
+
+"""
 func queue_audio_data() -> void:
 	# To-Do: This works, but conceptually sucks. It really should use an actual stream or buffer,
 	# maybe AudioStreamCapture could do the job, but it's Vector2...
 	record_effect.set_recording_active(false)
 	audio_buffer.put_data(record_effect.get_recording().data)
+	print(audio_buffer.get_size())
 	record_effect.set_recording_active(true)
 
 func pass_audio_data() -> void:
 	while buffer_cursor + block_size < audio_buffer.get_size():
 		audio_buffer.seek(buffer_cursor)
 		var subsample = audio_buffer.get_data(block_size)[1]
-		voice_recognizer.accept_waveform(subsample, block_size)
 		buffer_cursor += block_size
+		voice_recognizer.accept_waveform(subsample, block_size)
+
+"""
