@@ -285,6 +285,7 @@ void vosk_recognizer_set_result_options(VoskRecognizer *recognizer, const char *
  */
 void vosk_recognizer_set_words(VoskRecognizer *recognizer, int words);
 
+void vosk_recognizer_set_verbose(VoskRecognizer *recognizer, int verbose);
 
 /** Set NLSML output
  * @param nlsml - boolean value

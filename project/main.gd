@@ -33,6 +33,7 @@ func _ready():
 			)
 		var result_option := "phones"
 		voice_recognizer.set_result_options("phones")
+		voice_recognizer.set_verbose(true)
 
 		print("Model path: ", voice_recognizer.model_path)
 		print("Sample rate: ", voice_recognizer.sample_rate)
