@@ -37,6 +37,7 @@ public:
 	const int buffer_size();
 	
 	void set_result_options(String result_opts);
+	void set_verbose(bool verbose);
 };
 
 }

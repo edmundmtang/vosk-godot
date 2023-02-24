@@ -14,6 +14,7 @@ void GDVosk::_register_methods() {
 	register_method("buffer_size", &GDVosk::buffer_size);
 	
 	register_method("set_result_options", &GDVosk::set_result_options);
+	register_method("set_verbose", &GDVosk::set_verbose);
 
 }
 
@@ -57,4 +58,8 @@ const int GDVosk::buffer_size() {
 
 void GDVosk::set_result_options(String result_opts) {
 	vosk_recognizer_set_result_options(voice_recognizer, result_opts.alloc_c_string());
+}
+
+void GDVosk::set_verbose(bool verbose) {
+	vosk_recognizer_set_verbose(voice_recognizer, (int)verbose);
 }

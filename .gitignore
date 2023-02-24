@@ -8,10 +8,8 @@ project/language_models/*
 # everything from godot-cpp, necessary to compile the GDnative code
 godot-cpp/*
 
-# automatically generated files?
+# automatically generated files
 project/.import/*
-
-# my random 
-*.backup
 *.obj
+.sconsign.dblite
 
