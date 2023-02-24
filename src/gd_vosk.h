@@ -33,6 +33,7 @@ public:
 	
 	int accept_waveform(PoolByteArray data);
 	const char* get_partial();
+	const char* get_phone_partial();
 	const char* get_final();
 	const int buffer_size();
 	

@@ -33,7 +33,6 @@ func _ready():
 			)
 		var result_option := "phones"
 		voice_recognizer.set_result_options("phones")
-		voice_recognizer.set_verbose(true)
 
 		print("Model path: ", voice_recognizer.model_path)
 		print("Sample rate: ", voice_recognizer.sample_rate)
@@ -65,6 +64,7 @@ func stop_recording() -> void:
 func _process(delta):
 	if recording_player.is_recording and (recording_player.get_frames_available() > block_size):
 		pass_audio_data()
+		print(voice_recognizer.get_phone_partial())
 
 func pass_audio_data():
 	var sub_buffer = recording_player.get_buffer(block_size)
