@@ -19,7 +19,7 @@ private:
 	VoskModel * language_model;
 	VoskRecognizer * voice_recognizer;
 	
-	char buf[4096];
+	char buf[8192];
 	int nread;
 	
 public:

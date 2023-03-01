@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://test_HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Recording_Player.gd" type="Script" id=3]
+[ext_resource path="res://MouthTexture.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AudioStreamMicrophone" id=1]
 
@@ -18,3 +19,7 @@ stream = SubResource( 1 )
 autoplay = true
 bus = "Capture"
 script = ExtResource( 3 )
+
+[node name="MouthTexture" parent="." instance=ExtResource( 4 )]
+position = Vector2( 103, 190 )
+scale = Vector2( 3, 3 )
