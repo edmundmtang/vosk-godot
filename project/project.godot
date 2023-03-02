@@ -33,12 +33,14 @@ output_latency=0
 
 [debug]
 
-settings/fps/force_fps=60
+settings/fps/force_fps=30
 
 [display]
 
 window/size/width=300
 window/size/height=300
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gui]
 
