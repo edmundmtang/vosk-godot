@@ -33,7 +33,7 @@ output_latency=0
 
 [debug]
 
-settings/fps/force_fps=30
+settings/fps/force_fps=33
 
 [display]
 
