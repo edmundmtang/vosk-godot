@@ -10,6 +10,7 @@ void GDVosk::_register_methods() {
 	register_method("initialize", &GDVosk::initialize);
 	register_method("accept_waveform", &GDVosk::accept_waveform);
 	register_method("get_partial", &GDVosk::get_partial);
+	register_method("get_phone_partial", &GDVosk::get_phone_partial);
 	register_method("get_final", &GDVosk::get_final);
 	register_method("buffer_size", &GDVosk::buffer_size);
 	
@@ -46,6 +47,10 @@ int GDVosk::accept_waveform(PoolByteArray data) {
 
 const char * GDVosk::get_partial() {
 	return vosk_recognizer_partial_result(voice_recognizer);
+}
+
+const char * GDVosk::get_phone_partial() {
+	return vosk_recognizer_partial_phone_result(voice_recognizer);
 }
 
 const char * GDVosk::get_final() {

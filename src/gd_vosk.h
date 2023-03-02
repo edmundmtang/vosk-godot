@@ -19,7 +19,7 @@ private:
 	VoskModel * language_model;
 	VoskRecognizer * voice_recognizer;
 	
-	char buf[4096];
+	char buf[8192];
 	int nread;
 	
 public:
@@ -33,6 +33,7 @@ public:
 	
 	int accept_waveform(PoolByteArray data);
 	const char* get_partial();
+	const char* get_phone_partial();
 	const char* get_final();
 	const int buffer_size();
 	

@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Sprite",
+"class": "MouthTexture",
+"language": "GDScript",
+"path": "res://MouthTexture.gd"
+} ]
+_global_script_class_icons={
+"MouthTexture": ""
+}
+
 [application]
 
 config/name="vosk-godot"
@@ -21,10 +31,16 @@ enable_audio_input=true
 mix_rate=48000
 output_latency=0
 
+[debug]
+
+settings/fps/force_fps=33
+
 [display]
 
 window/size/width=300
 window/size/height=300
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gui]
 
