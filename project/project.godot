@@ -6,30 +6,21 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Sprite",
-"class": "MouthTexture",
-"language": "GDScript",
-"path": "res://MouthTexture.gd"
-} ]
-_global_script_class_icons={
-"MouthTexture": ""
-}
+config_version=5
 
 [application]
 
 config/name="vosk-godot"
-run/main_scene="res://main.tscn"
+run/main_scene="res://gd4test.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [audio]
 
-default_bus_layout="res://audio_bus.tres"
-enable_audio_input=true
+buses/default_bus_layout="res://audio_bus.tres"
+driver/enable_input=true
+driver/output_latency=0
 mix_rate=48000
-output_latency=0
 
 [debug]
 
@@ -37,10 +28,9 @@ settings/fps/force_fps=33
 
 [display]
 
-window/size/width=300
-window/size/height=300
+window/size/viewport_width=300
+window/size/viewport_height=300
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
 
 [gui]
 
@@ -52,4 +42,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"

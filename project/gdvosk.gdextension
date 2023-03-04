@@ -1,0 +1,11 @@
+[configuration]
+
+entry_symbol = "gdvosk_library_init"
+
+[libraries]
+
+windows.debug.x86_64 = "res://bin/libgdvosk.windows.template_debug.x86_64.dll"
+
+[dependencies]
+
+windows.debug.x86_64 = ["res://bin/libvosk.dll"]

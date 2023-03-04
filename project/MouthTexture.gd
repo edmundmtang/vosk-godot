@@ -1,5 +1,5 @@
 class_name MouthTexture
-extends Sprite
+extends Sprite2D
 
 signal end_of_sequence()
 
@@ -29,8 +29,8 @@ const PHONEME_GROUP : Dictionary = {
 func initialization(delay: float, delta: float) -> void:
 	self.animation_delay = delay
 	self.target_delta = delta
-	assert(self.target_delta > 0, "target_delta must be a positive value")
-	assert(self.animation_delay > self.target_delta, "animation_delay must be a positive value greater than target_delta")
+	assert(self.target_delta > 0) #,"target_delta must be a positive value")
+	assert(self.animation_delay > self.target_delta) #,"animation_delay must be a positive value greater than target_delta")
 
 func update_texture(phoneme_labels: Array, phoneme_timings: Array, delta: float) -> void:
 	add_next_frame(phoneme_labels, phoneme_timings)

@@ -22,5 +22,5 @@ func get_frames_available() -> int:
 func get_pushed_frames() -> int:
 	return capture_effect.get_pushed_frames()
 
-func get_buffer(frames: int) -> PoolByteArray:
+func get_buffer(frames: int) -> PackedByteArray:
 	return capture_effect.get_buffer_uint16(frames)
