@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://8i7gjj7knmyp"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_p7tlm"]
+[ext_resource type="Script" path="res://RecordingPlayer.gd" id="2_01rj6"]
+[ext_resource type="Script" path="res://speech_recognizer/VoskSpeechRecognizer.gd" id="3_bwln3"]
+[ext_resource type="PackedScene" uid="uid://d0odff4jebh0c" path="res://testHUD.tscn" id="4_4486j"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_vrv6q"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_p7tlm")
+
+[node name="RecordingPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_vrv6q")
+autoplay = true
+bus = &"Capture"
+script = ExtResource("2_01rj6")
+
+[node name="VoskSpeechRecognizer" type="VoskSpeechRecognizer" parent="."]
+script = ExtResource("3_bwln3")
+
+[node name="TestHUD" parent="." instance=ExtResource("4_4486j")]

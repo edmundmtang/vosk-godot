@@ -1,11 +1,53 @@
-#!python
-import os, subprocess
+#!/usr/bin/env python
+import os
+import sys
 
-opts = Variables([], ARGUMENTS)
+env = SConscript("godot-cpp/SConstruct")
 
-# Gets the standard flags CC, CCX, etc.
-env = DefaultEnvironment()
+# For the reference:
+# - CCFLAGS are compilation flags shared between C and C++
+# - CFLAGS are for C-specific compilation flags
+# - CXXFLAGS are for C++-specific compilation flags
+# - CPPFLAGS are for pre-processor flags
+# - CPPDEFINES are for pre-processor defines
+# - LINKFLAGS are for linking flags
 
+# make sure our binding library is properly includes
+env.Append(CPPPATH=["src/"])
+env.Append(LIBPATH=["libpath"])
+env.Append(LIBS=["libvosk",])
+
+# tweak this if you want to use different folders, or more folders, to store your source code in.
+env.Append(CPPPATH=["src/"])
+sources = Glob("src/*.cpp")
+
+if env["platform"] == "macos":
+    library = env.SharedLibrary(
+        "project/bin/lib_vosk_speech_recognizer.{}.{}.framework/lib_vosk_speech_recognizer.{}.{}".format(
+            env["platform"], env["target"], env["platform"], env["target"]
+        ),
+        source=sources,
+    )
+else:
+    library = env.SharedLibrary(
+        "project/bin/lib_vosk_speech_recognizer{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        source=sources,
+    )
+
+Default(library)
+
+	
+
+
+
+
+
+
+
+
+
+
+"""
 # Define our options
 opts.Add(EnumVariable('target', "Compilation target", 'debug', ['d', 'debug', 'r', 'release']))
 opts.Add(EnumVariable('platform', "Compilation platform", '', ['', 'windows', 'x11', 'linux', 'osx']))
@@ -91,3 +133,4 @@ Default(library)
 
 # Generates help for the -h scons option.
 Help(opts.GenerateHelpText(env))
+"""
