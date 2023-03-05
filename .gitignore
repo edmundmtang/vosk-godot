@@ -3,7 +3,7 @@ libpath/*
 project/bin/*
 
 # The language models from vosk are way too huge
-project/language_models/*
+project/*/language_models/*
 
 # everything from godot-cpp, necessary to compile the GDnative code
 godot-cpp/*
