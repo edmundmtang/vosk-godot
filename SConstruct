@@ -23,14 +23,14 @@ sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "project/bin/libgdvosk.{}.{}.framework/libgdexample.{}.{}".format(
+        "project/bin/lib_vosk_speech_recognizer.{}.{}.framework/lib_vosk_speech_recognizer.{}.{}".format(
             env["platform"], env["target"], env["platform"], env["target"]
         ),
         source=sources,
     )
 else:
     library = env.SharedLibrary(
-        "project/bin/libgdvosk{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        "project/bin/lib_vosk_speech_recognizer{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
     )
 

@@ -1,14 +1,14 @@
 /* Integration of vosk-api into godot
 */
 
-#ifndef GDVOSK_REGISTER_TYPES_H
-#define GDVOSK_REGISTER_TYPES_H
+#ifndef VOSK_SPEECH_RECOGNIZER_REGISTER_TYPES_H
+#define VOSK_SPEECH_RECOGNIZER_REGISTER_TYPES_H
 
 #include <godot_cpp/core/class_db.hpp>
 
 using namespace godot;
 
-void initialize_gdvosk_module(ModuleInitializationLevel p_level);
-void uninitialize_gdvosk_module(ModuleInitializationLevel p_level);
+void initialize_vosk_speech_recognizer_module(ModuleInitializationLevel p_level);
+void uninitialize_vosk_speech_recognizer_module(ModuleInitializationLevel p_level);
 
-#endif // GDVOSK_REGISTER_TYPES_H
+#endif // VOSK_SPEECH_RECOGNIZER_REGISTER_TYPES_H
