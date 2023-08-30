@@ -4,11 +4,15 @@
 #ifndef VOSK_SPEECH_RECOGNIZER_H
 #define VOSK_SPEECH_RECOGNIZER_H
 
+#include "vosk_api.h"
+
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/audio_effect_capture.hpp>
 #include <godot_cpp/core/binder_common.hpp>
 
-#include "vosk_api.h"
+
+#include <godot_cpp/classes/audio_effect.hpp>
+#include <godot_cpp/classes/audio_effect_instance.hpp>
 
 using namespace godot;
 
@@ -39,6 +43,7 @@ public:
 	void set_timings_option(bool timings);
 	
 	void initialize(String path, float rate);
+	void reset();
 	
 	int accept_waveform(PackedByteArray data);
 	String get_partial();
@@ -57,8 +62,32 @@ public:
 	static void _bind_methods();
 	
 	PackedByteArray get_buffer_uint16(int p_frames);
-	
+
 };
+/*
+class AudioEffectCustom;
+
+class AudioEffectCustomInstance : public AudioEffectInstance {
+	GDCLASS(AudioEffectCustomInstance, AudioEffectInstance);
+	friend class AudioEffectCustom;
+	Ref<AudioEffectCustom> base;
+	
+	int current_channel;
+	
+public:
+	static void _bind_methods();
+	void set_current_channel(int p_channel) {current_channel = p_channel;}
+//	virtual void process(const AudioFrame *p_src_frames, AudioFrame *p_dst_frames, int p_frame_count) override;
+};
+
+class AudioEffectCustom : public AudioEffect {
+	GDCLASS(AudioEffectCustom, AudioEffect);
+	
+public:
+	static void _bind_methods();
+	Ref<AudioEffectInstance> instantiate() override;
+};
+*/
 
 #endif // VOSK_SPEECH_RECOGNIZER_H
 	
