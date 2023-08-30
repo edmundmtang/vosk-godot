@@ -1,6 +1,6 @@
 # Directories using files from my vosk api
-libpath/*
-project/bin/*
+# libpath/*
+# project/bin/*
 
 # The language models from vosk are way too huge
 project/*/language_models/*
@@ -10,6 +10,7 @@ godot-cpp/*
 
 # automatically generated files
 project/.import/*
+project/.godot/*
 *.obj
 .sconsign.dblite
 

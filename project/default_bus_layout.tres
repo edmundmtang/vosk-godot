@@ -1,6 +1,6 @@
 [gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dpxluqq8qy37y"]
 
-[sub_resource type="AudioEffectCaptureExtend" id="AudioEffectCaptureExtend_iy28f"]
+[sub_resource type="AudioEffectCaptureExtend" id="AudioEffectCaptureExtend_kmsm8"]
 resource_name = "CaptureExtend"
 
 [resource]
@@ -10,5 +10,5 @@ bus/1/mute = true
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Capture 2"
-bus/1/effect/0/effect = SubResource("AudioEffectCaptureExtend_iy28f")
+bus/1/effect/0/effect = SubResource("AudioEffectCaptureExtend_kmsm8")
 bus/1/effect/0/enabled = true

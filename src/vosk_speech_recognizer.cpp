@@ -27,6 +27,7 @@ void VoskSpeechRecognizer::_bind_methods() {
 	
 	// Methods
 	ClassDB::bind_method(D_METHOD("initialize", "path", "sample_rate"), &VoskSpeechRecognizer::initialize);
+	ClassDB::bind_method(D_METHOD("reset"), &VoskSpeechRecognizer::reset);
 	ClassDB::bind_method(D_METHOD("accept_waveform", "audio_data"), &VoskSpeechRecognizer::accept_waveform);
 	ClassDB::bind_method(D_METHOD("get_partial"), &VoskSpeechRecognizer::get_partial);
 	ClassDB::bind_method(D_METHOD("get_phone_partial"), &VoskSpeechRecognizer::get_phone_partial);
@@ -70,6 +71,10 @@ void VoskSpeechRecognizer::initialize(String path, float rate) {
 	language_model = vosk_model_new(path.utf8().get_data());
 	set_sample_rate(rate);
 	speech_recognizer = vosk_recognizer_new(language_model, rate);
+}
+
+void VoskSpeechRecognizer::reset() {
+	vosk_recognizer_reset(speech_recognizer);
 }
 
 int VoskSpeechRecognizer::accept_waveform(PackedByteArray data) {
@@ -120,3 +125,24 @@ PackedByteArray AudioEffectCaptureExtend::get_buffer_uint16(int p_frames) {
 	}
 	return data;
 }
+
+// ===== AudioEffectCustom ===== //
+/*
+void AudioEffectCustomInstance::_bind_methods() {
+
+}
+
+
+void AudioEffectCustom::_bind_methods() {
+
+}
+
+Ref<AudioEffectInstance> AudioEffectCustom::instantiate() {
+	Ref<AudioEffectInstance> ins;
+	ins.instantiate();
+	ins->base = Ref<AudioEffectCustom>(this);
+	
+	
+	return ins;
+}
+*/
