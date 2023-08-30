@@ -18,8 +18,6 @@ var text_result : String = ""
 var phoneme_labels : Array
 var phoneme_timings : Array
 
-
-
 func _ready():
     print("Starting Test!")
 

@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func start_recording() -> void:
     is_recording = true
-    capture_effect.clear_buffer()
+#    capture_effect.clear_buffer()
 
 func stop_recording() -> void:
     is_recording = false

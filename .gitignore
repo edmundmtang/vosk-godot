@@ -10,6 +10,7 @@ godot-cpp/*
 
 # automatically generated files
 project/.import/*
+project/.godot/*
 *.obj
 .sconsign.dblite
 
