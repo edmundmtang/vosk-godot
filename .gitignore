@@ -1,5 +1,5 @@
 # Directories using files from my vosk api
-# libpath/*
+libpath/*
 # project/bin/*
 
 # The language models from vosk are way too huge
